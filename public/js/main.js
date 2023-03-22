@@ -24,9 +24,9 @@ chatForm.addEventListener('submit', (e) => { // listens for a submit event on th
 function outputMessage(message) {
     const div = document.createElement('div'); // creates a div
     div.classList.add('message'); // adds a class of message to the div
-    div.innerHTML = `<p class="meta">Brad <span>9:12pm</span></p>
+    div.innerHTML = `<p class="meta">${message.username} <span>${message.time}</span></p>
     <p class="text">
-        ${message}
+        ${message.text}
     </p>` // adds the message to the div with the metadata (name + time)
     document.querySelector('.chat-messages').appendChild(div); // appends the div that we created above to the chat log with the class of chat-messages
 }
