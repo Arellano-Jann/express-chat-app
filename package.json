@@ -1,0 +1,28 @@
+{
+  "name": "express-chat-app",
+  "version": "1.0.0",
+  "description": "Chat app with express",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arellano-Jann/express-chat-app.git"
+  },
+  "author": "Me.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Arellano-Jann/express-chat-app/issues"
+  },
+  "homepage": "https://github.com/Arellano-Jann/express-chat-app#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "socket.io": "^4.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
