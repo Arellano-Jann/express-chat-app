@@ -10,6 +10,20 @@ app.use(express.static(path.join(__dirname, 'public'))); // serves static files 
 
 io.on('connection', (socket) => { // runs when client connects
     console.log('New WS connection...');
+    
+    socket.emit('message', 'Welcome to the chat app!'); // emits an event to the client/user
+    socket.broadcast.emit('message', 'A user has fucking joined.'); // emits an event to all clients/users except the one that is connected
+    // io.emit(); // emits an event to all clients/users
+
+    socket.on('disconnect', () => { // listens for a disconnect event
+        io.emit('message', 'A user has left the fucking chat.'); // to run an emit notifying all users
+        console.log('Closing WS connection...')
+    })
+
+    socket.on('chatMessage', (msg) => {
+        io.emit('message', msg);
+    });
+
 });
 
 const PORT = 3000 || process.env.PORT; // uses 3000 as a default port unless there exists a preconfigured port environment variable
