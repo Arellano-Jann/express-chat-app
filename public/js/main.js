@@ -3,6 +3,12 @@ const chatMessages = document.querySelector('.chat-messages');
 
 const socket = io();
 
+const { username, room } = Qs.parse(location.search, { // grabs the username and room from the URL with the Qs library (qs cdn on google)
+    ignoreQueryPrefix: true // removes the ? from the query string
+})
+
+socket.emit('joinRoom', {username, room}); // emits the username and room to the server.js file
+
 socket.on('message', (message) => { // listens for the message event from the server.js file
     console.log(message);
     outputMessage(message);
