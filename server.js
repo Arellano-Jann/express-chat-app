@@ -20,10 +20,14 @@ io.on('connection', (socket) => { // runs when client connects
 
         socket.emit('message', formatMessage(botName, 'Welcome to the chat app!')); // emits an event to the client/user
         socket.broadcast.to(user.room).emit('message', formatMessage(botName, `${user.username} has fucking joined.`)); // emits an event to all clients/users IN A SPECIFIC ROOM/PLACE except the one that is connected
+        
         // socket.broadcast.emit('message', formatMessage(botName, 'A user has fucking joined.')); // emits an event to all clients/users except the one that is connected
         // io.emit(); // emits an event to all clients/users
 
-        
+        io.to(user.room).emit('roomUsers', { // sends room info. updates room info when someone joins
+            room: user.room,
+            users: getRoomUsers(user.room)
+        });
         
     });
     
@@ -38,10 +42,15 @@ io.on('connection', (socket) => { // runs when client connects
 
         if (user){ // if user exists. don't really know why this is tbh but eh.
             io.to(user.room).emit('message', formatMessage(botName, `${user.username} has fucking left.`)); // to run an emit notifying all users
+            
+            io.to(user.room).emit('roomUsers', { // sends room info. updates room info when someone leaves (identical to the joining counterpart)
+                room: user.room,
+                users: getRoomUsers(user.room)
+            });
+
             console.log('Closing WS connection...')
         }
-
-    })
+    });
 
 });
 

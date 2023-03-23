@@ -15,7 +15,7 @@ function getCurrentUser(id){
 function userLeave(id) { // user leaves the chat
     const i = users.findIndex(user => user.id === id); // finds the index of the user in the users array
     // const i = users.findIndex((user) => {
-    //     user.id === id; // triple equals is used to compare the value and the type? idk
+    //     return user.id === id; // triple equals is used to compare the value and the type? idk
     // });
     if (i !== -1) {
         return users.splice(i, 1)[0]; // returns the removed user
@@ -23,8 +23,9 @@ function userLeave(id) { // user leaves the chat
 }
 
 function getRoomUsers(room){
+    // return users.filter(user => user.room === room); // returns all users in a specific room. same implementation as below but shorter.
     return users.filter((user) => {
-        user.room === room; // triple equals is used to compare the value and the type? idk
+        return user.room === room; // triple equals is used to compare the value and the type? idk
     });
 }
 
